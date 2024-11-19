@@ -1,5 +1,5 @@
-import { marked  } from 'marked'
-import React, {useState, useEffect} from 'react'
+import { marked } from 'marked'
+import React, { useState, useEffect } from 'react'
 
 export const DEFAULT_VALUE = `# React Markdown Previewer!
 
@@ -38,17 +38,22 @@ function MarkdownPreviewer() {
   useEffect(() => {
     markdownParser(markdownInput)
   }, [])
-  
+
 
   const markdownParser = (input) => {
-    setMarkdownInput(input) 
-    setMarkdownOutput(marked(input, {breaks:true}))
+    setMarkdownInput(input)
+    setMarkdownOutput(marked(input, { breaks: true }))
   }
 
   return (
-    <div>
-      <textarea name="markdownInput" id="editor" onChange={e => markdownParser(e.target.value)} >{markdownInput}</textarea>
-      <div id='preview' dangerouslySetInnerHTML={{__html: marked.parse(markdownOutput, {breaks:true})}}></div>
+    <div className='row container-fluid h100 w100'>
+      <div className="col-sm-6">
+        <textarea name="markdownInput" id="editor" onChange={e => markdownParser(e.target.value)} style={{"width":"100%", "height":"100%"}}>{markdownInput}</textarea>
+      </div>
+
+      <div className="col-sm-6">
+        <div id='preview' dangerouslySetInnerHTML={{ __html: marked.parse(markdownOutput, { breaks: true }) }}></div>
+      </div>
 
     </div>
   )
